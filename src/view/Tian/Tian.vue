@@ -1,5 +1,6 @@
 <template>
   <div>
+    <LanguageSwitch></LanguageSwitch>
     <div>时时过滤搜索</div>
     <Select  v-model="couponData"  filterable  multiple  @input="limitcount" style="width:400px" @on-query-change="searchInner">
       <Option v-for="item in checkBoxCount" :value="item.id" :key="item.id" :disabled="disabledMax15">
@@ -9,6 +10,7 @@
     <div>
     <Tabs>
         <TabPane label="macOS" icon="logo-apple">
+          <DatePicker type="date" placeholder="Select date" style="width: 200px"></DatePicker>
             <Button class="mg-bt-20" type="success" size="large">点击新增</Button>
             <div class="formWrap">
               <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
@@ -39,7 +41,11 @@
 </template>
 
 <script>
+import LanguageSwitch from '../../components/common/LanguageSwitch/LanguageSwitch'
 export default {
+    components: {
+      LanguageSwitch
+  },
   data () {
     return {
       formValidate: {

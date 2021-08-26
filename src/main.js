@@ -6,10 +6,13 @@ import './assets/my-theme/index.less';
 import './assets/styles/reset.scss';
 import VueI18n from 'vue-i18n'
 import router from "./router";
-
+import en from 'view-design/dist/locale/en-US';
+import zh from 'view-design/dist/locale/zh-CN';
+let obj = {zh: zh, en: en}
 Vue.use(ViewUI)
 Vue.use(VueI18n)
 let lang = localStorage.getItem('lang') || 'zh'
+ViewUI.locale(obj[lang])
 localStorage.setItem('lang', lang)
 const i18n = new VueI18n({
   locale: localStorage.getItem('lang'),    // 语言标识

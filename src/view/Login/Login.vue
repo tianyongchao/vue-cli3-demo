@@ -2,16 +2,9 @@
 <div class="loginWrap">
     <div class="loginInner">
       <h2>{{ $t('login.login') }}</h2>
-          <Dropdown class="dropdown">
-            <a href="javascript:void(0)">
-                {{currrentLauage}}
-                <Icon type="ios-arrow-down"></Icon>
-            </a>
-        <DropdownMenu slot="list">
-            <DropdownItem @click.stop.native="switchLanguage('简体中文')">简体中文</DropdownItem>
-            <DropdownItem @click.stop.native="switchLanguage('English')">English</DropdownItem>
-        </DropdownMenu>
-        </Dropdown>
+      <div class="dropdown">
+          <LanguageSwitch></LanguageSwitch>
+      </div>
         <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
           <div>
               <FormItem prop="user">
@@ -37,11 +30,13 @@
 </div>
 </template>
 <script>
+import LanguageSwitch from '../../components/common/LanguageSwitch/LanguageSwitch'
     export default {
+        components: {
+            LanguageSwitch
+        },
         data () {
             return {
-                currrentLauage: '简体中文',
-                objLauage :{'zh': '简体中文', 'en': 'English'},
                 formInline: {
                     user: '',
                     password: ''
@@ -68,18 +63,6 @@
                     }
                 })
             },
-            switchLanguage (lauage) {
-                this.$router.go(0)
-                if (lauage == '简体中文') {
-                    localStorage.setItem('lang', 'zh')
-                } else {
-                    localStorage.setItem('lang', 'en')
-                }
-                this.currrentLauage = this.objLauage[localStorage.getItem('lang')]
-            }
-        },
-        created () {
-            this.currrentLauage = this.objLauage[localStorage.getItem('lang')]
         }
     }
 </script>
